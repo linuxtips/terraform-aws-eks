@@ -1,4 +1,4 @@
-# LINUXtips-eks Terraform Module
+# LINUXtips-eks  terraform-aws-eks
 
 ## Description
 
