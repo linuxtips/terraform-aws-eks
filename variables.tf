@@ -83,7 +83,7 @@ variable "node_capacity_type" {
 variable "node_labels" {
   description = "Key-value mapping of labels for the node group"
   type        = map(string)
-  default     = {
+  default = {
     role = "general"
   }
 }

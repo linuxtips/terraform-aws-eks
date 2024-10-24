@@ -9,8 +9,8 @@ resource "aws_subnet" "public_subnets" {
   tags = merge(
     var.tags,
     {
-      Name                                   = "${var.name}-public-${var.availability_zones[count.index]}"
-      "kubernetes.io/role/elb"               = "1"
+      Name                                        = "${var.name}-public-${var.availability_zones[count.index]}"
+      "kubernetes.io/role/elb"                    = "1"
       "kubernetes.io/cluster/${var.cluster_name}" = "owned"
     }
   )
