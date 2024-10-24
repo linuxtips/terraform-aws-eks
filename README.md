@@ -1,4 +1,4 @@
-# linuxtips-eks Terraform Module
+# LINUXtips-eks Terraform Module
 
 ## Description
 
