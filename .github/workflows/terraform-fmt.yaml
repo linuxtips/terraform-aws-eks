@@ -1,0 +1,24 @@
+name: terraform-fmt
+on:
+  pull_request:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform-fmt:
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: Checkout 
+        uses: actions/checkout@v4 
+
+      - name: Setup Terraform 
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.5.5"
+
+      - name: Terraform Format 
+        run: terraform fmt -check -recursive -diff
+        
