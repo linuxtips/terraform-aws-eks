@@ -119,5 +119,5 @@ variable "project" {
 variable "node_ami_type" {
   description = "AMI ID for worker nodes"
   type        = string
-  default     = "ami-XXXXXXXXXXXXXXXXX"
+  default     = "AL2_x86_64"
 }
