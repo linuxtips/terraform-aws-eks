@@ -1,0 +1,47 @@
+name: terratest
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "The branch to run tests from"
+        default: "main"
+        required: true
+        type: string
+
+env: 
+  AWS_REGION: us-east-1
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+concurrency:
+  group: terratest
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  terratest:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+          check-latest: true
+          cache-dependency-path: |
+                go.sum
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.7.1"
+
+      - name: Run terratest only on changed modules
+        run: |
+            echo "###### running terratest on module #####"
+            go test -v tests/*.go -timeout 60m
