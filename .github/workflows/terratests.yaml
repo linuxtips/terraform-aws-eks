@@ -1,13 +1,7 @@
 name: terratest
 
 on:
-  workflow_dispatch:
-    inputs:
-      ref:
-        description: "The branch to run tests from"
-        default: "main"
-        required: true
-        type: string
+  pull_request:
 
 env: 
   AWS_REGION: us-east-1
@@ -25,7 +19,7 @@ permissions:
 jobs:
   terratest:
     runs-on: ubuntu-latest
-    environment: production
+    environment: testing
     steps:
       - uses: actions/checkout@v4
 
